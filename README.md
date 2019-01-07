@@ -1,6 +1,8 @@
 # ImageClassification
 Machine Learning Assignment on Facial Recognition
 
+The most complete repository is in google drive since large files can easily be uploaded there. It contains all releveant folder for code to run. 
+
 # Library Dependancies
 Sklearn, SkImage, Keras, Tensorflow, DLib, pandas, numpy, joblib, Open-CV(cv2).
 
