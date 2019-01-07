@@ -13,3 +13,14 @@ There are 4 distinct files:
 -- tranferLearning.py: Feature extraction with ResNet and train linear SVM   
 -- ImagePreprocessor.py: Class for ImagePreproccessing prior to training   
 -- Predictions.py: For writing final predictions to CSV   
+
+# GuideLines
+Preferably you have write and read permissions since many files write output to new directories which might not exist in your system. If not, you can manually create the directories:      
+-- models For CNN   
+-- models2  For SVM   
+-- files For any Files   
+
+Most Importantly the dataset must be present in a folder called dataset and contain all samples. Further for generation of predicted labels there must also be a testing_dataset directory.     
+--- dataset !!!   
+--- testing_dataset !!!   
+
