@@ -24,3 +24,5 @@ Most Importantly the dataset must be present in a folder called dataset and cont
 --- dataset !!!   
 --- testing_dataset !!!   
 
+# Submitted Zip
+The submitted zip contains all relevant files including all the models, dataset and helpful files.
