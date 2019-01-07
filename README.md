@@ -25,4 +25,4 @@ Most Importantly the dataset must be present in a folder called dataset and cont
 --- testing_dataset !!!   
 
 # Submitted Zip
-The submitted zip contains all relevant files including all the models, dataset and helpful files.
+The submitted zip contains all relevant files including all the models, dataset and helpful files. You might wish to copy the dropIndices numpy file which specifies the indices to be droped since it takes quite a lot of time to create the dataset for the first time if this file does not exist beacasue we have to apply the HOG classifier to each individual image.
