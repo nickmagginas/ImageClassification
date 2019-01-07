@@ -10,6 +10,7 @@ from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 import matplotlib.pyplot as plt
 
 
+''' CNN Model For Binary and Multi-Class'''
 def createModel(multiclass = False):
     model = Sequential()
     model.add(Conv2D(32, (3,3), padding = 'same', input_shape = (128,128,3), activation = 'relu'))
@@ -33,28 +34,31 @@ def createModel(multiclass = False):
         model.add(Dense(1, activation = 'sigmoid'))
     return model
 
+'''
+train function for all tasks
+-- outputs model files in models directory which can then be used for predictions
+'''
+
 def train():
-    columns = [f'Unnamed: {i}' for i in range(3,4)]
+    columns = [f'Unnamed: {i}' for i in range(1,6)]
     for index,column in enumerate(columns):
+        ''' Get Dataset '''
         features, labels = ImagePreprocessor.createDataset(column, grayscale = False, normalize = True)
         features = np.reshape(features, (len(features), 128, 128, 3))
+        ''' onehot for multiclass '''
         if index == 1: labels = onehot(labels)
         else: labels = [0 if label == '-1' else int(label) for label in labels]
+        ''' split train and test sets '''
         features, testX, labels, testY = split(features, labels, test_size = 0.2)
         model = createModel(multiclass = (column == 'Unnamed: 1'))
+        ''' Stop after 2 epochs if val loss doent decrease, reduce LR when val loss stops decreasing, save model on epoch end '''
         callbacks = [EarlyStopping(monitor = 'val_loss', restore_best_weights= True, patience = 2), ReduceLROnPlateau(monitor = 'val_loss', factor = 0.2, patience = 1)]
-        #callbacks.append(ModelCheckpoint(f'models/Task{index+1}.h5'))
+        callbacks.append(ModelCheckpoint(f'models/Task{index+1}.h5'))
+        ''' loss function different for multi and binary '''
         loss = 'categorical_crossentropy' if index == 1 else 'binary_crossentropy'
+        ''' adam optimizer validate on split class weighting for undereprestented classes '''
         model.compile(optimizer = 'adam', loss = loss, metrics = ['accuracy'])
         history = model.fit(features, labels, batch_size = 32, epochs = 20, validation_data = (testX, testY), callbacks = callbacks, class_weight = 'auto')
-        plt.plot(history.history['loss'])
-        plt.plot(history.history['val_loss'])
-        plt.title('CNN Loss')
-        plt.ylabel('Loss')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper left')
-        plt.show()
-        #model.save(f'models2/Task{index+1}.h5')
 
 if __name__ == '__main__':
     train()
