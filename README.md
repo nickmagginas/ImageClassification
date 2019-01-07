@@ -9,7 +9,7 @@ Some functions such as saving models and loading them back might require some ad
 
 # Code
 There are 4 distinct files:
--- Classifier.py: Trains CNN for all tasks
--- tranferLearning.py: Feature extraction with ResNet and train linear SVM
--- ImagePreprocessor.py: Class for ImagePreproccessing prior to training
--- Predictions.py: For writing final predictions to CSV
+-- Classifier.py: Trains CNN for all tasks  
+-- tranferLearning.py: Feature extraction with ResNet and train linear SVM   
+-- ImagePreprocessor.py: Class for ImagePreproccessing prior to training   
+-- Predictions.py: For writing final predictions to CSV   
